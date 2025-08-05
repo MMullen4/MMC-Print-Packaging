@@ -1,0 +1,25 @@
+type Mutation {
+  sendContactEmail(name: String!, email: String!, message: String!): Boolean
+}
+
+type Query {
+  _empty: String
+}
+
+// File: server/src/resolvers/contactResolver.ts
+import { Resolvers } from '../types';
+import sendEmail from '../utils/mailer';
+
+export const contactResolver: Resolvers = {
+  Mutation: {
+    sendContactEmail: async (_, { name, email, message }) => {
+      try {
+        await sendEmail(name, email, message);
+        return true;
+      } catch (err) {
+        console.error(err);
+        return false;
+      }
+    },
+  },
+};
