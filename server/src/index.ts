@@ -1,30 +1,32 @@
 import express from "express";
-import { ApolloServer } from "apollo-server-express";
 import { readFileSync } from "fs";
 import { join } from "path";
-import { contactResolver } from "./resolvers/contactResolver";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@apollo/server/express4";
+import { json } from "body-parser";
+import cors from "cors";
 import dotenv from "dotenv";
+import { resolvers } from "./resolvers/contactResolver";
 
 dotenv.config();
 
 const typeDefs = readFileSync(
-  join(__dirname, "./typeDefs/schema.graphql"),
+  join(process.cwd(), "src/typeDefs/schema.graphql"),
   "utf8"
 );
-const resolvers = contactResolver;
 
 async function startServer() {
   const app = express();
   const server = new ApolloServer({ typeDefs, resolvers });
   await server.start();
-  server.applyMiddleware({ app });
+  app.use(cors(), json(), expressMiddleware(server));
 
   const PORT = process.env.PORT || 3001;
-  app.listen(PORT, () =>
+  app.listen(PORT, () => {
     console.log(
-      `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
-    )
-  );
+      `🚀 Apollo Server v4 running at http://localhost:${PORT}/graphql`
+    );
+  });
 }
 
 startServer();

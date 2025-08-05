@@ -7,12 +7,14 @@ type Query {
 }
 
 // File: server/src/resolvers/contactResolver.ts
-import { Resolvers } from '../types';
 import sendEmail from '../utils/mailer';
 
-export const contactResolver: Resolvers = {
+export const resolvers = {
+  Query: {
+    _empty: () => 'MMC Print & Packaging Backend Running'
+  },
   Mutation: {
-    sendContactEmail: async (_, { name, email, message }) => {
+    sendContactEmail: async (_: any, { name, email, message }: any) => {
       try {
         await sendEmail(name, email, message);
         return true;

@@ -13,6 +13,7 @@ export default function HomePage() {
         We deliver high-quality print marketing materials and custom packaging
         solutions that make your brand stand out.
       </p>
+      <div className="bg-green-200 text-xl p-4">Tailwind is working!</div>
     </div>
   );
 }
