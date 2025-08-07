@@ -1,6 +1,6 @@
-// vite.config.ts
+// vite.config.mts
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react"; // ✅ use import, not require
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
