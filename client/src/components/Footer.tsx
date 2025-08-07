@@ -12,7 +12,7 @@ export default function Footer() {
 
         <div className="flex space-x-4">
           <a
-            href="https://www.linkedin.com/in/matthew-mullen-83a80a240/"
+            href="https://www.linkedin.com/in/matthewmullen1/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-600 transition"
@@ -20,7 +20,7 @@ export default function Footer() {
             <FaLinkedin size={20} />
           </a>
           <a
-            href="https://www.instagram.com/mmc.print.packaging/"
+            href="https://www.instagram.com/mhmullen4/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-pink-600 transition"
