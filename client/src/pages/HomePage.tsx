@@ -8,6 +8,9 @@ export default function HomePage() {
         We deliver high-quality print marketing materials and custom packaging
         solutions that make your brand stand out.
       </p>
+      <div className="flex justify-center gap-6 mt-8">
+        <img src="/assets/Plat_J.jpg" alt="Print Example" className="w-1/3 rounded-lg shadow-lg" />
+      </div>
     </div>
   );
 }
