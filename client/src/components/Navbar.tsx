@@ -12,69 +12,35 @@ export default function Navbar() {
     { name: "Contact", path: "/contact" },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) =>
+    location.pathname === path
+      ? "text-blue-600 underline"
+      : "text-gray-700 hover:text-blue-500";
 
   return (
-    <Disclosure
-      as="nav"
-      style={{
-        backgroundColor: "#2563eb",
-        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-      }}
-    >
+    <Disclosure as="nav" className="bg-white shadow sticky top-0 z-50">
       {({ open }) => (
         <>
-          <div
-            style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 16px" }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                height: "64px",
-              }}
-            >
-              {/* Logo - Fixed on left */}
-              <Link to="/" style={{ flexShrink: 0 }}>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between">
+              {/* Logo */}
+              <Link to="/" className="flex-shrink-0">
                 <img
                   src="/assets/MMC.svg"
                   alt="MMC Logo"
-                  style={{
-                    height: "60px",
-                    width: "auto",
-                    maxWidth: "120px",
-                  }}
+                  className="h-20 w-auto"
                 />
               </Link>
 
-              {/* Desktop Navigation */}
-              <div
-                style={{ display: "flex", gap: "32px" }}
-                className="hidden md:flex"
-              >
+              {/* Desktop Nav */}
+              <div className="hidden md:flex space-x-6">
                 {navLinks.map(({ name, path }) => (
                   <Link
                     key={name}
                     to={path}
-                    style={{
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      color: isActive(path) ? "#1e40af" : "white",
-                      backgroundColor: isActive(path)
-                        ? "#ffffff"
-                        : "transparent",
-                      padding: "8px 16px",
-                      borderRadius: "6px",
-                      textDecoration: "none",
-                      border: isActive(path)
-                        ? "2px solid #1e40af"
-                        : "2px solid transparent",
-                      transition: "all 0.2s ease",
-                    }}
+                    className={`px-4 py-2 border border-blue-600 rounded-md text-lg font-semibold transition hover:bg-blue-600 hover:text-white ${isActive(
+                      path
+                    )}`}
                   >
                     {name}
                   </Link>
@@ -83,79 +49,29 @@ export default function Navbar() {
 
               {/* Mobile menu button */}
               <div className="md:hidden">
-                <Disclosure.Button
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "8px",
-                    borderRadius: "6px",
-                    color: "white",
-                    border: "none",
-                    background: "transparent",
-                  }}
-                >
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none">
                   {open ? (
-                    <XMarkIcon
-                      style={{
-                        display: "block",
-                        height: "24px",
-                        width: "24px",
-                      }}
-                    />
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
                   ) : (
-                    <Bars3Icon
-                      style={{
-                        display: "block",
-                        height: "24px",
-                        width: "24px",
-                      }}
-                    />
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
               </div>
             </div>
           </div>
 
-          {/* Mobile menu */}
-          <Disclosure.Panel
-            style={{ backgroundColor: "#1d4ed8" }}
-            className="md:hidden"
-          >
-            <div
-              style={{
-                padding: "16px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-              }}
-            >
-              {navLinks.map(({ name, path }) => (
-                <Disclosure.Button
-                  as={Link}
-                  key={name}
-                  to={path}
-                  style={{
-                    display: "block",
-                    padding: "12px 16px",
-                    fontSize: "16px",
-                    fontWeight: "600",
-                    color: isActive(path) ? "#1e40af" : "white",
-                    backgroundColor: isActive(path) ? "#ffffff" : "transparent",
-                    borderRadius: "6px",
-                    textDecoration: "none",
-                    border: isActive(path)
-                      ? "2px solid #1e40af"
-                      : "2px solid transparent",
-                    textAlign: "left",
-                    margin: "4px 0",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {name}
-                </Disclosure.Button>
-              ))}
-            </div>
+          {/* Mobile Nav */}
+          <Disclosure.Panel className="md:hidden px-4 pb-3 pt-2">
+            {navLinks.map(({ name, path }) => (
+              <Disclosure.Button
+                key={name}
+                as={Link}
+                to={path}
+                className={`block py-2 text-base font-medium ${isActive(path)}`}
+              >
+                {name}
+              </Disclosure.Button>
+            ))}
           </Disclosure.Panel>
         </>
       )}
