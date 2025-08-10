@@ -24,12 +24,13 @@ export default function Navbar() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               {/* Logo */}
-              <Link to="/" className="flex-shrink-0">
+              <Link to="/" className="flex-shrink-0 flex items-center">
                 <img
                   src="/assets/MMC.svg"
                   alt="MMC Logo"
                   className="h-20 w-auto"
                 />
+                <span className="ml-3 text-xl font-bold text-gray-800">Print & Packaging</span>
               </Link>
 
               {/* Desktop Nav */}

@@ -13,7 +13,7 @@ export default function ServicesPage() {
           <ul className="list-disc list-inside">
             <li>Business Cards</li>
             <li>Flyers & Postcards</li>
-            <li>Brochures</li>
+            <li>Books & Brochures</li>
             <li>Signage & Banners (indoor and outdoor)</li>
             <li>Direct Mail</li>
           </ul>

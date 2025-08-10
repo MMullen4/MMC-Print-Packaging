@@ -28,6 +28,7 @@ export default function ContactPage() {
 
   return (
     <div className="p-8 max-w-xl mx-auto">
+  <img src="/assets/Direct Mail2.avif" alt="Direct Mail Example" className="w-full mb-6 rounded-lg shadow-lg" />
       <h2 className="text-3xl font-semibold mb-6 text-center">Contact Us</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
