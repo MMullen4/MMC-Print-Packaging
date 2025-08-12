@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
     "build": "tsc && mkdir -p dist/typeDefs && cp src/typeDefs/schema.graphql dist/typeDefs/schema.graphql",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "preview": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
     "@apollo/server": "^4.12.2",
