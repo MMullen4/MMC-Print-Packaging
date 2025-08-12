@@ -1,7 +1,0 @@
-type Mutation {
-  sendContactEmail(name: String!, email: String!, message: String!): Boolean
-}
-
-type Query {
-  health: String
-}
