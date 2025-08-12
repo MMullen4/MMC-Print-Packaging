@@ -6,7 +6,7 @@ type Query {
   _empty: String
 }
 
-// File: server/src/resolvers/contactResolver.ts
+# File: server/src/resolvers/contactResolver.ts
 import sendEmail from '../utils/mailer';
 
 export const resolvers = {
