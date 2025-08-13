@@ -1,14 +1,17 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { json } from "body-parser";
+import bodyParser from "body-parser"; // ✅ Default import
+
 import nodemailer from "nodemailer";
 import path from "path";
 import { fileURLToPath } from "url";
 
 dotenv.config();
 
+const json = bodyParser.json;         // ✅ Extract method
 const app = express();
+
 app.use(cors());
 app.use(json());
 
