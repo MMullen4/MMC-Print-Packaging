@@ -1,15 +1,10 @@
 import { useState } from "react";
-import { useMutation, gql } from "@apollo/client";
-
-const SEND_EMAIL = gql`
-  mutation SendEmail($name: String!, $email: String!, $message: String!) {
-    sendContactEmail(name: $name, email: $email, message: $message)
-  }
-`;
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sendEmail, { data, loading, error }] = useMutation(SEND_EMAIL);
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,16 +14,31 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus("loading");
+
     try {
-      await sendEmail({ variables: form });
+      const res = await fetch("http://localhost:3001/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+      setStatus("success");
+      setForm({ name: "", email: "", message: "" });
     } catch (err) {
-      console.error("Mutation error:", err);
+      console.error("Error sending contact form:", err);
+      setStatus("error");
     }
   };
 
   return (
     <div className="p-8 max-w-xl mx-auto">
-  <img src="/assets/Direct Mail2.avif" alt="Direct Mail Example" className="w-full mb-6 rounded-lg shadow-lg" />
+      <img
+        src="/assets/Direct Mail2.avif"
+        alt="Direct Mail Example"
+        className="w-full mb-6 rounded-lg shadow-lg"
+      />
       <h2 className="text-3xl font-semibold mb-6 text-center">Contact Us</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -38,6 +48,7 @@ export default function ContactPage() {
           className="w-full border p-2"
           required
           onChange={handleChange}
+          value={form.name}
         />
         <input
           name="email"
@@ -46,6 +57,7 @@ export default function ContactPage() {
           className="w-full border p-2"
           required
           onChange={handleChange}
+          value={form.email}
         />
         <textarea
           name="message"
@@ -53,18 +65,21 @@ export default function ContactPage() {
           className="w-full border p-2 h-32"
           required
           onChange={handleChange}
+          value={form.message}
         />
         <button
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded"
+          disabled={status === "loading"}
         >
-          {loading ? "Sending..." : "Send Message"}
+          {status === "loading" ? "Sending..." : "Send Message"}
         </button>
       </form>
-      {data?.sendContactEmail && (
+
+      {status === "success" && (
         <p className="text-green-600 mt-4">Thanks! We'll be in touch.</p>
       )}
-      {error && (
+      {status === "error" && (
         <p className="text-red-600 mt-4">
           Something went wrong. Please try again.
         </p>

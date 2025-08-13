@@ -1,38 +1,55 @@
 import express from "express";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { ApolloServer } from "@apollo/server";
-import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 import dotenv from "dotenv";
 import { json } from "body-parser";
-import { resolvers } from "./resolvers/contactResolver";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 
-const typeDefs = readFileSync(
-  join(__dirname, "./typeDefs/schema.graphql"),
-  "utf8"
-);
+const app = express();
 
-async function startServer() {
-  const app = express();
-  const server = new ApolloServer({ typeDefs, resolvers });
-  await server.start();
+app.use(cors());
+app.use(json());
 
-  // ✅ Apply middlewares BEFORE expressMiddleware
-  app.use(cors());
-  app.use(json());
+app.post("/contact", async (req, res) => {
+  const { name, email, message } = req.body;
 
-  // ✅ Use expressMiddleware AFTER json middleware is set up
-  app.use("/graphql", expressMiddleware(server));
+  if (!name || !email || !message) {
+    return res.status(400).json({ success: false, error: "Missing fields" });
+  }
 
-  const PORT = process.env.PORT || 3001;
-  app.listen(PORT, () => {
-    console.log(
-      `🚀 Apollo Server v4 running at http://localhost:${PORT}/graphql`
-    );
-  });
-}
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER, // your Gmail address
+        pass: process.env.EMAIL_PASS, // your Gmail app password
+      },
+    });
 
-startServer();
+    await transporter.sendMail({
+      from: `"MMC Contact" <${process.env.EMAIL_USER}>`,
+      to: "matt@mmcprintpackaging.com", // your destination email
+      subject: `Contact Form Submission from ${name}`,
+      text: `
+        Name: ${name}
+        Email: ${email}
+        Message: ${message}
+      `,
+    });
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Email sent successfully" });
+  } catch (err) {
+    console.error("Email send error:", err);
+    return res
+      .status(500)
+      .json({ success: false, error: "Failed to send email" });
+  }
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`🚀 Express server running at http://localhost:${PORT}`);
+});
