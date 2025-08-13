@@ -1,11 +1,6 @@
 {
   "build": {
-    "env": {
-      "NODE_ENV": "production"
-    },
-    "command": "cd server && npm install && npm run build"
-  },
-  "start": {
-    "command": "cd server && npm start"
+    "buildCommand": "npm install && cd client && npm install && npm run build && cd ../server && npm run build",
+    "startCommand": "node dist/index.js"
   }
 }
