@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "module": "ESNext",
+    "jsx": "react-jsx", // Optional; only needed if you're using JSX in backend
+    "module": "CommonJS", // Express backend should use CommonJS, not ESNext
     "target": "ES6",
     "strict": true,
     "moduleResolution": "Node",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "outDir": "dist", // ✅ this tells TypeScript where to emit compiled files
+    "rootDir": "src" // ✅ assumes your code is in /src
   },
   "include": ["src"]
 }
