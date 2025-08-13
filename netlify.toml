@@ -1,9 +1,8 @@
 [build]
   base    = "client"
-  publish = "client/dist"
+  publish = "dist"          # ✅ correct path relative to the base
   command = "npm run build"
 
-# Optional redirect for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
