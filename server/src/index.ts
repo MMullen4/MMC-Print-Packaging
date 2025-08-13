@@ -19,7 +19,6 @@ app.use(json());
 const __dirname = path.dirname(fileURLToPath(import.meta.url)); // only needed if using ESM
 const clientBuildPath = path.resolve(__dirname, "../client/dist");
 
-
 app.use(express.static(clientBuildPath));
 
 // 🟢 API route
