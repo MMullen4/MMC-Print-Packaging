@@ -13,8 +13,9 @@ app.use(cors());
 app.use(json());
 
 // 🟢 Serve static files from the React app
-const __dirname = process.cwd(); // Get the current working directory
-const clientBuildPath = path.join(__dirname, "../../client/dist");
+const __dirname = path.dirname(fileURLToPath(import.meta.url)); // only needed if using ESM
+const clientBuildPath = path.resolve(__dirname, "../client/dist");
+
 
 app.use(express.static(clientBuildPath));
 

@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "CommonJS",
+    "module": "esnext", // ✅ allows import.meta
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "rootDir": "./src",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx",
     "strict": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true
+    "outDir": "dist",
+    "rootDir": "src"
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src"]
 }
