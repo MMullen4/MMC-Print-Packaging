@@ -13,7 +13,7 @@ app.use(cors());
 app.use(json());
 
 // 🟢 Serve static files from the React app
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirname = process.cwd(); // Get the current working directory
 const clientBuildPath = path.join(__dirname, "../../client/dist");
 
 app.use(express.static(clientBuildPath));
@@ -25,7 +25,7 @@ app.post("/contact", async (req, res) => {
   if (!name || !email || !message) {
     return res.status(400).json({ success: false, error: "Missing fields" });
   }
-
+  
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
