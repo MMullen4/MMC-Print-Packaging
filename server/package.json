@@ -4,12 +4,10 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn src/index.ts",
-    "build": "npm run build-client && tsc",
-    "build-client": "cd ../client && npm install && npm run build",
-    "start": "node dist/index.js",
-    "postinstall": "npm run build-client"
-  },
+  "dev": "ts-node-dev --respawn src/index.ts",
+  "build": "tsc",
+  "start": "node dist/index.js"
+},
   "dependencies": {
     "body-parser": "^2.2.0",
     "cors": "^2.8.5",
