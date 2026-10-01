@@ -1,27 +1,16 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import bodyParser from "body-parser"; // ✅ Default import
-
+import bodyParser from "body-parser";
 import nodemailer from "nodemailer";
-import path from "path";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
-const json = bodyParser.json;         // ✅ Extract method
 const app = express();
 
 app.use(cors());
-app.use(json());
+app.use(bodyParser.json());
 
-// 🟢 Serve static files from the React app
-const __dirname = path.dirname(fileURLToPath(import.meta.url)); // only needed if using ESM
-const clientBuildPath = path.resolve(__dirname, "../client/dist");
-
-app.use(express.static(clientBuildPath));
-
-// 🟢 API route
 app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -58,11 +47,6 @@ app.post("/contact", async (req, res) => {
       .status(500)
       .json({ success: false, error: "Failed to send email" });
   }
-});
-
-// 🟢 Serve index.html for all other routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(clientBuildPath, "index.html"));
 });
 
 // Start server
