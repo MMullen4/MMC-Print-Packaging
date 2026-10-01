@@ -35,7 +35,7 @@ export default function AboutPage() {
         </p>
         <div className="text-center mt-4">
           <a
-            href="https://calendly.com/YOUR-CALENDLY-LINK" // replace with your actual link
+            href="https://calendly.com/mhmullen"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
