@@ -19,7 +19,7 @@ export default function ContactForm() {
     setStatus(null);
 
     try {
-        const res = await fetch("https://mmc-print-packaging-production.up.railway.app/contact", {
+        const res = await fetch("https://mmc-print-packaging-production-0936.up.railway.app/contact", {
         // Adjust URL to your deployed server
         method: "POST",
         headers: { "Content-Type": "application/json" },
