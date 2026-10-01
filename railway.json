@@ -1,6 +1,6 @@
 {
   "build": {
-    "buildCommand": "npm install && npm run build",
-    "startCommand": "node dist/index.js"
+    "buildCommand": "npm run build",
+    "startCommand": "cd server && node dist/index.js"
   }
 }

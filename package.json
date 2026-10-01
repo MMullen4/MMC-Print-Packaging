@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build": "cd server && npm install && npm run build",
+    "start": "cd server && node dist/index.js"
+  },
   "dependencies": {
     "resend": "^6.31.0"
   }
