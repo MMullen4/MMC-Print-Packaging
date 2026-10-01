@@ -2,5 +2,8 @@
   "build": {
     "buildCommand": "npm install && npm run build",
     "startCommand": "node dist/index.js"
+  },
+  "deploy": {
+    "startCommand": "node dist/index.js"
   }
 }
