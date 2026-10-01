@@ -17,7 +17,7 @@ export default function ContactPage() {
     setStatus("loading");
 
     try {
-      const res = await fetch("http://localhost:8080/contact", {
+      const res = await fetch("https://mmc-print-packaging-production-0936.up.railway.app/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
