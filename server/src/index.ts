@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 dotenv.config();
 
 const app = express();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -17,35 +18,19 @@ app.post("/contact", async (req, res) => {
   if (!name || !email || !message) {
     return res.status(400).json({ success: false, error: "Missing fields" });
   }
-  
-  try {
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
 
-    await transporter.sendMail({
-      from: `"MMC Contact" <${process.env.EMAIL_USER}>`,
+  try {
+    await resend.emails.send({
+      from: "MMC Contact <onboarding@resend.dev>",
       to: "matt@mmcprintpackaging.com",
       subject: `Contact Form Submission from ${name}`,
-      text: `
-        Name: ${name}
-        Email: ${email}
-        Message: ${message}
-      `,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
 
-    return res
-      .status(200)
-      .json({ success: true, message: "Email sent successfully" });
+    return res.status(200).json({ success: true, message: "Email sent successfully" });
   } catch (err) {
     console.error("Email send error:", err);
-    return res
-      .status(500)
-      .json({ success: false, error: "Failed to send email" });
+    return res.status(500).json({ success: false, error: "Failed to send email" });
   }
 });
 
