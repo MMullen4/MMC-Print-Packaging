@@ -2,13 +2,9 @@ import { useState } from "react";
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -33,19 +29,19 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="p-8 max-w-xl mx-auto">
+    <div className="px-4 py-8 sm:p-8 max-w-xl mx-auto">
       <img
         src="/assets/Direct Mail2.avif"
         alt="Direct Mail Example"
         className="w-full mb-6 rounded-lg shadow-lg"
       />
-      <h2 className="text-3xl font-semibold mb-6 text-center">Contact Us</h2>
+      <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">Contact Us</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           name="name"
           type="text"
           placeholder="Name"
-          className="w-full border p-2"
+          className="w-full border p-3 rounded text-base"
           required
           onChange={handleChange}
           value={form.name}
@@ -54,7 +50,7 @@ export default function ContactPage() {
           name="email"
           type="email"
           placeholder="Email"
-          className="w-full border p-2"
+          className="w-full border p-3 rounded text-base"
           required
           onChange={handleChange}
           value={form.email}
@@ -62,14 +58,14 @@ export default function ContactPage() {
         <textarea
           name="message"
           placeholder="Message"
-          className="w-full border p-2 h-32"
+          className="w-full border p-3 rounded text-base h-32"
           required
           onChange={handleChange}
           value={form.message}
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded"
+          className="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded text-base hover:bg-blue-700 transition"
           disabled={status === "loading"}
         >
           {status === "loading" ? "Sending..." : "Send Message"}
@@ -80,9 +76,7 @@ export default function ContactPage() {
         <p className="text-green-600 mt-4">Thanks! We'll be in touch.</p>
       )}
       {status === "error" && (
-        <p className="text-red-600 mt-4">
-          Something went wrong. Please try again.
-        </p>
+        <p className="text-red-600 mt-4">Something went wrong. Please try again.</p>
       )}
     </div>
   );
