@@ -36,6 +36,20 @@ export default function ContactPage() {
         className="w-full mb-6 rounded-lg shadow-lg"
       />
       <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">Contact Us</h2>
+      <div className="mb-6 text-center space-y-2">
+        <p className="text-base sm:text-lg">
+          <span className="font-semibold">Email:</span>{" "}
+          <a href="mailto:matt@mmcprintpackaging.com" className="text-blue-600 hover:underline">
+            matt@mmcprintpackaging.com
+          </a>
+        </p>
+        <p className="text-base sm:text-lg">
+          <span className="font-semibold">Phone:</span>{" "}
+          <a href="tel:+16268182525" className="text-blue-600 hover:underline">
+            (626) 818-2525
+          </a>
+        </p>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           name="name"
