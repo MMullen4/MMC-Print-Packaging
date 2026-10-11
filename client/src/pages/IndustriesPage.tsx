@@ -36,7 +36,7 @@ const industries = [
   },
   {
     title: "Retail",
-    image: "/assets/industries/retail.jpg",
+    image: "/assets/industries/Sea-to-Me.png",
     description:
       "Product packaging, labels, point-of-sale displays, signage and window graphics.",
     position: "center 30%",
