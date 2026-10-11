@@ -17,7 +17,7 @@ const industries = [
   },
   {
     title: "Food & Beverage",
-    image: "/assets/industries/food-beverage.jpg",
+    image: "/assets/industries/Takeaway Pkg.png",
     description:
       "Custom packaging, labels, tags, menus, displays and restaurant marketing materials.",
   },
