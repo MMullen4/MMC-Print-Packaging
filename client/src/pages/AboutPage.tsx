@@ -25,7 +25,7 @@ export default function AboutPage() {
           Why use MMC?
         </h3>
         <p className="text-base sm:text-xl mb-4">
-          We are about you. Your goals. Your needs. Your brand.
+          We are about you - your goals - your needs - your brand.
         </p>
         <p className="text-base sm:text-xl mb-4">
           Many larger print businesses employ a transactional approach unless
