@@ -7,6 +7,7 @@ type Industry = {
   description: string;
   position?: string;
   contain?: boolean;
+  brightness?: number;
 };
 
 const industries: Industry[] = [
@@ -15,11 +16,13 @@ const industries: Industry[] = [
     images: [
       "/assets/industries/automotive-2.png",
       "/assets/industries/automotive-2.jpg",
+      "/assets/industries/DU auto mag.png",
     ],
     description:
       "Sales and service materials, stationery, promotional products and branded marketing materials.",
     position: "center",
-    contain: true,
+    contain: false,
+    brightness: 1.3,
   },
   {
     title: "Education",
@@ -35,6 +38,7 @@ const industries: Industry[] = [
     images: [
       "/assets/industries/Takeaway Pkg.png",
       "/assets/Chori label.jpg",
+      "/assets/Trademark Label.jpg",
     ],
     description:
       "Custom packaging, labels, tags, menus, displays and restaurant marketing materials.",
@@ -63,6 +67,8 @@ const industries: Industry[] = [
     images: [
       "/assets/industries/Sea-to-Me.png",
       "/assets/industries/retail-2.jpg",
+      "/assets/boxes pic.avif",
+      "/assets/retail.png",
     ],
     description:
       "Product packaging, labels, point-of-sale displays, signage and window graphics.",
@@ -79,12 +85,14 @@ function CardSlideshow({
   alt,
   position = "center",
   contain = false,
+  brightness = 1,
   delay = 0,
 }: {
   images: string[];
   alt: string;
   position?: string;
   contain?: boolean;
+  brightness?: number;
   delay?: number;
 }) {
   const [current, setCurrent] = useState(0);
@@ -123,7 +131,7 @@ function CardSlideshow({
             transition-opacity duration-1000
             ${index === current ? "opacity-100" : "opacity-0"}
           `}
-          style={{ objectPosition: position }}
+          style={{ objectPosition: position, filter: brightness !== 1 ? `brightness(${brightness})` : undefined }}
         />
       ))}
     </div>
@@ -169,6 +177,7 @@ export default function IndustriesPage() {
               alt={`${industry.title} print and packaging solutions`}
               position={industry.position}
               contain={industry.contain}
+              brightness={(industry as any).brightness}
               delay={index * 600}
             />
 
