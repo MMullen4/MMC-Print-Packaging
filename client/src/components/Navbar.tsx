@@ -29,7 +29,7 @@ export default function Navbar() {
                 <img
                   src="/assets/MMC.svg"
                   alt="MMC Logo"
-                  className="h-12 w-auto"
+                  className="h-20 w-auto"
                 />
                 <span className="ml-2 text-base sm:text-xl font-bold text-gray-800 truncate">Print & Packaging</span>
               </Link>
