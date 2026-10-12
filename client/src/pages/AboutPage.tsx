@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function AboutPage() {
   return (
     <div className="px-4 py-8 sm:p-8 max-w-3xl mx-auto text-center">
@@ -6,14 +8,17 @@ export default function AboutPage() {
         alt="Matt Mullen"
         className="rounded-full w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6"
       />
-      <h2 className="text-xl sm:text-2xl font-semibold mb-4">About MMC Print & Packaging</h2>
+      <h2 className="text-xl sm:text-2xl font-semibold mb-4">
+        About MMC Print & Packaging
+      </h2>
       <p className="text-base sm:text-xl">
-        With over 20 years of experience in print and packaging, Matt Mullen
-        brings strategic insight and unmatched customer service to clients, and offers solutions that grow sales.
+        Matt Mullen brings strategic insight and unmatched customer service to
+        clients, and offers solutions that grow your brand & sales. He has over 20 years of
+        experience in print and packaging.  
       </p>
       <div className="mt-12 text-left">
         <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-center">
-          Why use us?
+          Why use MMC?
         </h3>
         <p className="text-base sm:text-xl mb-4">
           We are about you. Your goals. Your needs. Your brand.
@@ -29,7 +34,7 @@ export default function AboutPage() {
         </p>
         <p className="text-base sm:text-xl mb-4">
           <strong>Click the link</strong> to set up a quick 15-minute meeting
-          through Calendly. Or better yet, just call.
+          through Calendly. Or better yet, <Link to="/contact" className="text-blue-600 underline hover:text-blue-800">just call</Link>.
         </p>
         <div className="text-center mt-4">
           <a
