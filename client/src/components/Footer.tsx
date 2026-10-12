@@ -12,7 +12,7 @@ export default function Footer() {
 
         <div className="flex space-x-4">
           <a
-            href="https://www.linkedin.com/in/matthewmullen1/"
+            href="https://www.linkedin.com/in/matt-mullen-0a9646325/"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-blue-600 transition"
