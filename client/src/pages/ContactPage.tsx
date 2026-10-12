@@ -29,7 +29,11 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="px-4 py-8 sm:p-8 max-w-xl mx-auto">
+    <div className="relative px-4 py-8 sm:p-8 max-w-xl mx-auto">
+      <div
+        className="fixed inset-0 bg-cover bg-center opacity-20 -z-10"
+        style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
+      />
       <img
         src="/assets/Direct Mail2.avif"
         alt="Direct Mail Example"

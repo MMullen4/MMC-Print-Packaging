@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 
 export default function AboutPage() {
   return (
-    <div className="px-4 py-8 sm:p-8 max-w-3xl mx-auto text-center">
+    <div className="relative px-4 py-8 sm:p-8 max-w-3xl mx-auto text-center">
+      <div
+        className="fixed inset-0 bg-cover bg-center opacity-20 -z-10"
+        style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
+      />
       <img
         src="/assets/Matt.png"
         alt="Matt Mullen"

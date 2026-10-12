@@ -1,6 +1,10 @@
 export default function HomePage() {
   return (
-    <div className="px-4 py-8 sm:p-8 text-center">
+    <div className="relative px-4 py-8 sm:p-8 text-center">
+      <div
+        className="fixed inset-0 bg-cover bg-center opacity-20 -z-10"
+        style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
+      />
       <h1 className="text-2xl sm:text-4xl font-bold mb-4">
         Welcome to MMC Print & Packaging
       </h1>
