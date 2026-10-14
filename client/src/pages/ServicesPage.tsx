@@ -1,3 +1,5 @@
+import ProjectCTA from "../components/ProjectCTA";
+
 function ServiceCard({
   image,
   images,
@@ -80,7 +82,7 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-8 max-w-7xl mx-auto">
       <h2 className="text-3xl font-semibold mb-2 text-center">Our Products & Services</h2>
       <p className="text-center text-gray-500 mb-10">High-quality print and packaging solutions tailored to your brand.</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -88,6 +90,9 @@ export default function ServicesPage() {
           <ServiceCard key={s.title} image={(s as any).image} images={(s as any).images} title={s.title} items={s.items} contain={(s as any).contain} position={(s as any).position} scale={(s as any).scale} />
         ))}
       </div>
+      
+      {/* Project CTA */}
+      <ProjectCTA />
     </div>
   );
 }
