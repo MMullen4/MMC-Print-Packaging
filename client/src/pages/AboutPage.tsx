@@ -17,7 +17,7 @@ export default function AboutPage() {
       </h2>
       <p className="text-base sm:text-xl">
         Matt Mullen brings strategic insight and unmatched customer service to
-        clients, and offers solutions that grow your brand & sales. He has over 20 years of
+        clients, and offers solutions that build your brand & grow your sales. He has over 20 years of
         experience in print and packaging.  
       </p>
       <div className="mt-12 text-left">
