@@ -10,6 +10,7 @@ export default function Navbar() {
     { name: "About", path: "/about" },
     { name: "Industries", path: "/industries" },
     { name: "Services", path: "/services" },
+    { name: "Insights", path: "/insights" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -35,12 +36,12 @@ export default function Navbar() {
               </Link>
 
               {/* Desktop Nav */}
-              <div className="hidden md:flex space-x-6">
+              <div className="hidden md:flex space-x-3">
                 {navLinks.map(({ name, path }) => (
                   <Link
                     key={name}
                     to={path}
-                    className={`px-4 py-2 border border-blue-600 rounded-md text-lg font-semibold transition hover:bg-blue-600 hover:text-white ${isActive(
+                    className={`px-3 py-2 border border-blue-600 rounded-md text-lg font-semibold transition hover:bg-blue-600 hover:text-white ${isActive(
                       path
                     )}`}
                   >
