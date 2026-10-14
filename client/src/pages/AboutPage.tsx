@@ -17,8 +17,8 @@ export default function AboutPage() {
       </h2>
       <p className="text-base sm:text-xl">
         Matt Mullen brings strategic insight and unmatched customer service to
-        clients, and offers solutions that build your brand & grow your sales. He has over 20 years of
-        experience in print and packaging.  
+        clients. With over 20 years of experience in print and packaging, MMC
+        offers solutions that builds your brand & grows your sales.
       </p>
       <div className="mt-12 text-left">
         <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-center">
@@ -28,8 +28,7 @@ export default function AboutPage() {
           We are about you - your goals - your needs - your brand.
         </p>
         <p className="text-base sm:text-xl mb-4">
-          Many larger print businesses employ a transactional approach unless
-          you're a large corporation, leaving small to mid-sized businesses with
+          Many large printing companies employ a transactional approach, leaving small to mid-sized businesses with
           fewer choices, an impersonal relationship, and your needs unfulfilled.
         </p>
         <p className="text-base sm:text-xl mb-4">
@@ -38,7 +37,14 @@ export default function AboutPage() {
         </p>
         <p className="text-base sm:text-xl mb-4">
           <strong>Click the link</strong> to set up a quick 15-minute meeting
-          through Calendly. Or better yet, <Link to="/contact" className="text-blue-600 underline hover:text-blue-800">just call</Link>.
+          through Calendly. Or better yet,{" "}
+          <Link
+            to="/contact"
+            className="text-blue-600 underline hover:text-blue-800"
+          >
+            just call
+          </Link>
+          .
         </p>
         <div className="text-center mt-4">
           <a

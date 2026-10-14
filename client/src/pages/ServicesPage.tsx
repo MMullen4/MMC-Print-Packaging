@@ -64,7 +64,7 @@ const services = [
   {
     image: "/assets/install.jpg",
     title: "Signage & Installation",
-    items: ["Indoor Signage", "Outdoor Banners", "Vehicle Wraps", "Wall Graphics"],
+    items: ["Indoor Signage", "Outdoor Banners", "Auto Magnets", "Wall Graphics"],
     contain: false,
   },
   {
