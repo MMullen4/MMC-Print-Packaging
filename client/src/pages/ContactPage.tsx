@@ -1,10 +1,15 @@
 import { useState } from "react";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -13,7 +18,8 @@ export default function ContactPage() {
     setStatus("loading");
 
     try {
-      const res = await fetch("https://mmc-print-packaging-production-0936.up.railway.app/contact", {
+      // sends the contact form data to backend API
+      const res = await fetch(`${API_URL}/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -39,11 +45,16 @@ export default function ContactPage() {
         alt="Direct Mail Example"
         className="w-full mb-6 rounded-lg shadow-lg"
       />
-      <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">Contact Us</h2>
+      <h2 className="text-2xl sm:text-3xl font-semibold mb-6 text-center">
+        Contact Us
+      </h2>
       <div className="mb-6 text-center space-y-2">
         <p className="text-base sm:text-lg">
           <span className="font-semibold">Email:</span>{" "}
-          <a href="mailto:matt@mmcprintpackaging.com" className="text-blue-600 hover:underline">
+          <a
+            href="mailto:matt@mmcprintpackaging.com"
+            className="text-blue-600 hover:underline"
+          >
             matt@mmcprintpackaging.com
           </a>
         </p>
@@ -94,7 +105,9 @@ export default function ContactPage() {
         <p className="text-green-600 mt-4">Thanks! We'll be in touch.</p>
       )}
       {status === "error" && (
-        <p className="text-red-600 mt-4">Something went wrong. Please try again.</p>
+        <p className="text-red-600 mt-4">
+          Something went wrong. Please try again.
+        </p>
       )}
     </div>
   );

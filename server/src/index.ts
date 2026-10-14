@@ -16,21 +16,44 @@ app.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ success: false, error: "Missing fields" });
+    return res.status(400).json({
+      success: false,
+      error: "Missing fields"
+    });
   }
 
-  try {
+  try { // send email using Resend
+    const { data, error } = 
     await resend.emails.send({
       from: "MMC Contact <onboarding@resend.dev>",
       to: "matt@mmcprintpackaging.com",
       subject: `Contact Form Submission from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      replyTo: email,
     });
 
-    return res.status(200).json({ success: true, message: "Email sent successfully" });
+    if (error) {
+      console.error("Resend error:", error);
+      return res.status(400).json({
+        success: false,
+        error: error.message,
+      });
+    }
+    
+    console.log("Email sent:", data);
+
+    return res.status(200).json({
+      success: true,
+      message: "Email sent successfully",
+      id: data?.id,
+    });
   } catch (err) {
     console.error("Email send error:", err);
-    return res.status(500).json({ success: false, error: "Failed to send email" });
+    return res.status(500).json
+      ({
+        success: false,
+        error: "Failed to send email"
+      });
   }
 });
 
