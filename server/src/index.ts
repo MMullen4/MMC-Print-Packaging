@@ -43,7 +43,6 @@ Email: ${email}
 Message:
 ${message}
       `,
-      replyTo: email,
     });
 
     if (error) {
@@ -72,8 +71,8 @@ ${message}
   }
 });
 
-// Start server
 const PORT = process.env.PORT || 8080;
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
