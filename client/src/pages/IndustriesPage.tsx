@@ -19,7 +19,7 @@ const industries: Industry[] = [
       "/assets/industries/DU auto mag.png",
     ],
     description:
-      "Sales and service materials, stationery, promotional products and branded marketing materials.",
+      "Sales and service materials, brochures, promotional products and branded marketing materials.",
     position: "center",
     contain: false,
     brightness: 1.3,
@@ -31,7 +31,7 @@ const industries: Industry[] = [
       "/assets/industries/education-2.jpg",
     ],
     description:
-      "Catalogs, stationery, presentation materials and custom school spirit products.",
+      "Catalogs, apparel, presentation materials and custom school spirit products.",
   },
   {
     title: "Food & Beverage",
@@ -50,7 +50,7 @@ const industries: Industry[] = [
       "/assets/industries/healthcare-2.jpg",
     ],
     description:
-      "Marketing collateral, stationery, labels and promotional products for health care organizations.",
+      "Marketing collateral, labels and promotional products for health care organizations.",
     position: "center top",
   },
   {
@@ -60,7 +60,7 @@ const industries: Industry[] = [
       "/assets/industries/real-estate-2.jpg",
     ],
     description:
-      "Sales collateral, brochures, presentation folders, displays and branded stationery.",
+      "Sales collateral, brochures, presentation folders, displays and signage.",
   },
   {
     title: "Retail",
