@@ -11,7 +11,7 @@ export default function HomePage() {
         Welcome to MMC Print & Packaging
       </h1>
       <p className="text-base sm:text-lg max-w-xl mx-auto">
-        We deliver high quality print marketing and packaging
+        We deliver premium print marketing and packaging
         solutions that build your brand.
       </p>
       <div className="flex justify-center gap-4 mt-7">
