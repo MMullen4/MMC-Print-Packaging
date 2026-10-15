@@ -4,6 +4,7 @@ import { insights } from "../data/insights";
 
 const filters = [
   "All",
+  "Recent Projects",
   "Packaging",
   "Print",
   "Technology",
@@ -90,6 +91,20 @@ export default function InsightsPage() {
               </a>
             )}
 
+            {insight.video && (
+              <div className="bg-gray-950 flex justify-center">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  className="w-full h-96 object-contain"
+                >
+                  <source src={insight.video} type="video/mp4" />
+                  Your browser does not support video playback.
+                </video>
+              </div>
+            )}
+
             {/* Category */}
             <div className="px-6 pt-6">
               <div className="flex justify-between items-center gap-4 mb-4">
@@ -100,7 +115,9 @@ export default function InsightsPage() {
                     px-3 py-1
                     rounded-full
                     ${
-                      insight.type === "linkedin"
+                      insight.type === "project"
+                        ? "bg-green-100 text-green-800"
+                        : insight.type === "linkedin"
                         ? "bg-blue-100 text-blue-800"
                         : "bg-gray-100 text-gray-700"
                     }

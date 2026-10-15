@@ -1,6 +1,6 @@
 export type Insight = {
   id: number;
-  type: "news" | "linkedin";
+  type: "news" | "linkedin" | "project";
   category: string;
   title: string;
   date: string;
@@ -8,6 +8,7 @@ export type Insight = {
   whyItMatters?: string;
   link?: string;
   image?: string;
+  video?: string;
 };
 
 export const insights: Insight[] = [
@@ -23,6 +24,18 @@ export const insights: Insight[] = [
       "Effective packaging has only a few seconds to communicate with a shopper. Clear benefit messaging, strong visual hierarchy and shelf differentiation can turn the package itself into an important sales tool.",
     link: "https://www.linkedin.com/posts/susan-jennings-design_branddesign-packagingdesign-cpg-share-7514313741031895040-h0FA/",
     image: "/assets/insights/3-farm-daughters.jpg",
+  },
+  {
+    id: 5,
+    type: "project",
+    category: "Recent Projects",
+    title: "Making an Impact with Large-Format Printing",
+    date: "October 15, 2026",
+    summary:
+      "A look at a large-format banner produced for a client, demonstrating how print can create an immediate visual impact at scale.",
+    whyItMatters:
+      "Large-format graphics give brands an opportunity to command attention in ways that smaller printed pieces cannot. The right combination of imagery, production quality and scale can transform a space and reinforce a brand's presence.",
+    video: "/assets/insights/marble-banner-project.mp4",
   },
   {
     id: 1,
@@ -46,5 +59,4 @@ export const insights: Insight[] = [
     whyItMatters:
       "More automated production can improve turnaround times, consistency and the economics of shorter production runs.",
   },
-
 ];
