@@ -35,6 +35,7 @@ app.post("/contact", async (req, res) => {
     const { data, error } = await resend.emails.send({
       from: "MMC Website <website@mmcprintpackaging.com>",
       to: ["matt@mmcprintpackaging.com"],
+      reply_to: email,
       subject: `MMC Website Contact from ${name}`,
       text: `
 Name: ${name}
@@ -42,7 +43,7 @@ Email: ${email}
 
 Message:
 ${message}
-      `,
+  `,
     });
 
     if (error) {
