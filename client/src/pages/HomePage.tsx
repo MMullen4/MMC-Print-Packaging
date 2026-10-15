@@ -1,8 +1,15 @@
 import ProjectCTA from "../components/ProjectCTA";
+import SEO from "../components/SEO";
 
 export default function HomePage() {
   return (
     <div className="relative px-4 py-8 sm:p-8 text-center">
+      // HomePage.tsx
+      <SEO
+        title="MMC Print & Packaging | Printing & Packaging Solutions"
+        description="MMC Print & Packaging provides commercial printing, custom packaging, labels, marketing materials and large-format print solutions."
+        path="/"
+      />
       <div
         className="fixed inset-0 bg-cover bg-center opacity-20 -z-10"
         style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
@@ -11,8 +18,8 @@ export default function HomePage() {
         Welcome to MMC Print & Packaging
       </h1>
       <p className="text-base sm:text-lg max-w-xl mx-auto">
-        We deliver premium print marketing and packaging
-        solutions that build your brand.
+        We deliver premium print marketing and packaging solutions that build
+        your brand.
       </p>
       <div className="flex justify-center gap-4 mt-7">
         <img

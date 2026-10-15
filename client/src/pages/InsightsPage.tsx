@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ProjectCTA from "../components/ProjectCTA";
 import { insights } from "../data/insights";
+import SEO from "../components/SEO";
 
 const filters = [
   "All",
@@ -24,6 +25,12 @@ export default function InsightsPage() {
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
       {/* Header */}
+      // InsightsPage.tsx
+      <SEO
+        title="Print & Packaging Insights | MMC Print & Packaging"
+        description="Explore print and packaging trends, production technology, industry developments and recent projects from MMC Print & Packaging."
+        path="/insights"
+      />
       <section className="text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-5">
           Print & Packaging Insights
@@ -34,7 +41,6 @@ export default function InsightsPage() {
           perspectives from across the print and packaging world.
         </p>
       </section>
-
       {/* Filters */}
       <div className="flex flex-wrap justify-center gap-3 mb-12">
         {filters.map((filter) => (
@@ -58,7 +64,6 @@ export default function InsightsPage() {
           </button>
         ))}
       </div>
-
       {/* Articles */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 items-start">
         {filteredInsights.map((insight) => (
@@ -165,13 +170,11 @@ export default function InsightsPage() {
           </article>
         ))}
       </section>
-
       {filteredInsights.length === 0 && (
         <div className="text-center py-16 text-gray-500">
           No articles in this category yet.
         </div>
       )}
-
       <ProjectCTA />
     </main>
   );

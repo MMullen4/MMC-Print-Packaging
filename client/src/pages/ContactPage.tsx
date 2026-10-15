@@ -1,4 +1,6 @@
 import { useState } from "react";
+import SEO from "../components/SEO";
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 console.log("MMC API URL:", API_URL)
@@ -38,6 +40,12 @@ export default function ContactPage() {
 
   return (
     <div className="relative px-4 py-8 sm:p-8 max-w-xl mx-auto">
+      // ContactPage.tsx
+      <SEO
+        title="Contact MMC Print & Packaging | Start Your Project"
+        description="Contact MMC Print & Packaging to discuss your next printing, packaging, label, display or large-format graphics project."
+        path="/contact"
+      />
       <div
         className="fixed inset-0 bg-cover bg-center opacity-20 -z-10"
         style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
@@ -102,7 +110,6 @@ export default function ContactPage() {
           {status === "loading" ? "Sending..." : "Send Message"}
         </button>
       </form>
-
       {status === "success" && (
         <p className="text-green-600 mt-4">Thanks! We'll be in touch.</p>
       )}

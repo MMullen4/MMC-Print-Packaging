@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 export default function AboutPage() {
   return (
     <div className="relative px-4 py-8 sm:p-8 max-w-3xl mx-auto text-center">
+      // AboutPage.tsx
+      <SEO
+        title="About MMC Print & Packaging | Print & Packaging Expertise"
+        description="Learn about MMC Print & Packaging and our approach to helping businesses develop effective print marketing and packaging solutions."
+        path="/about"
+      />
       <div
         className="fixed inset-0 bg-cover bg-center opacity-20 -z-10"
         style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
@@ -28,8 +35,9 @@ export default function AboutPage() {
           We are about you - your goals - your needs - your brand.
         </p>
         <p className="text-base sm:text-xl mb-4">
-          Many large printing companies employ a transactional approach, leaving small to mid-sized businesses with
-          fewer choices, an impersonal relationship, and your needs unfulfilled.
+          Many large printing companies employ a transactional approach, leaving
+          small to mid-sized businesses with fewer choices, an impersonal
+          relationship, and your needs unfulfilled.
         </p>
         <p className="text-base sm:text-xl mb-4">
           We focus on unique solutions that maximize speed to market, elevate

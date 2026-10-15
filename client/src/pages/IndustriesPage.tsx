@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ProjectCTA from "../components/ProjectCTA";
+import SEO from "../components/SEO";
 
 type Industry = {
   title: string;
@@ -142,12 +143,16 @@ export default function IndustriesPage() {
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
       {/* Header */}
-
       <section className="text-center mb-12">
+        // IndustriesPage.tsx
+        <SEO
+          title="Custom Print & Packaging Solutions by Industry | MMC"
+          description="Explore custom printing and packaging solutions for brands and businesses across a range of industries."
+          path="/industries"
+        />
         <h1 className="text-4xl md:text-5xl font-bold mb-5">
           Solutions by Industry
         </h1>
-
         <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
           From packaging and labels to print marketing and point-of-sale
           displays, MMC provides solutions tailored to your business, your
@@ -194,7 +199,6 @@ export default function IndustriesPage() {
 
       {/* CTA */}
       <ProjectCTA />
-
     </main>
   );
 }
