@@ -33,7 +33,7 @@ app.post("/contact", async (req, res) => {
     console.log("Attempting to send email with Resend...");
 
     const { data, error } = await resend.emails.send({
-      from: "MMC Contact <onboarding@resend.dev>",
+      from: "MMC Website <website@mmcprintpackaging.com>",
       to: ["matt@mmcprintpackaging.com"],
       subject: `MMC Website Contact from ${name}`,
       text: `
