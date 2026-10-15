@@ -92,17 +92,15 @@ export default function InsightsPage() {
             )}
 
             {insight.video && (
-              <div className="bg-gray-950 flex justify-center">
-                <video
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="w-full h-96 object-contain"
-                >
-                  <source src={insight.video} type="video/mp4" />
-                  Your browser does not support video playback.
-                </video>
-              </div>
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-auto"
+              >
+                <source src={insight.video} type="video/mp4" />
+                Your browser does not support video playback.
+              </video>
             )}
 
             {/* Category */}

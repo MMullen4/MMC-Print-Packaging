@@ -32,10 +32,10 @@ export const insights: Insight[] = [
     title: "Making an Impact with Large-Format Printing",
     date: "October 15, 2026",
     summary:
-      "A look at a large-format banner produced for a client, demonstrating how print can create an immediate visual impact at scale.",
+      "A look at a large-format banner (89 inches x 135 inches) produced for a client, demonstrating how print can create an immediate visual impact at scale.",
     whyItMatters:
       "Large-format graphics give brands an opportunity to command attention in ways that smaller printed pieces cannot. The right combination of imagery, production quality and scale can transform a space and reinforce a brand's presence.",
-    video: "/assets/insights/marble-banner-project.mp4",
+    video: "/assets/insights/marble-banner-project-cropped.mp4",
   },
   {
     id: 1,
