@@ -22,13 +22,13 @@ function ServiceCard({
       <div className="relative h-48">
         {images ? (
           <div className="flex h-full">
-            <img src={images[0]} alt={title} className="w-1/2 h-full object-contain rotate-90 bg-gray-50" />
-            <img src={images[1]} alt={title} className="w-1/2 h-full object-contain bg-gray-50" />
+            <img src={images[0]} alt={title} className="w-1/2 h-full object-contain rotate-90 bg-gray-50" style={{ filter: "brightness(1.2)" }} />
+            <img src={images[1]} alt={title} className="w-1/2 h-full object-contain bg-gray-50" style={{ filter: "brightness(1.2)" }} />
           </div>
         ) : (
           <img src={image} alt={title} className={`w-full h-full ${contain ? "object-contain bg-gray-50" : "object-cover"}`} style={{ objectPosition: position, filter: "brightness(1.2)" }} />
         )}
-        <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+        <div className="absolute inset-0 bg-black/20 flex items-end p-4">
           <h3 className="text-white text-xl font-bold">{title}</h3>
         </div>
       </div>
@@ -56,16 +56,17 @@ const services = [
     items: ["Custom Boxes", "Labels", "Retail Displays"],
   },
   {
-    image: "/assets/Trademark Label.jpg",
+    image: "/assets/sleeve.jpg",
     title: "Labels & Sleeves",
-    items: ["Product Labels", "Shrink Sleeves", "Custom Die-Cut Labels"],
+    items: ["Product Labels", "Package Sleeves", "Custom Die-Cut Labels"],
     contain: false,
   },
   {
     image: "/assets/install.jpg",
     title: "Signage & Installation",
-    items: ["Indoor Signage", "Outdoor Banners", "Auto Magnets", "Wall Graphics"],
+    items: ["Indoor / Outdoor Signage & Banners", "Auto Magnets", "Wall Graphics"],
     contain: false,
+    position: "center 35%",
   },
   {
     images: ["/assets/Kistler pens.jpg", "/assets/Kinecta bottle.jpg"],
