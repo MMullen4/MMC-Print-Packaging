@@ -10,6 +10,8 @@ function ServiceCard({
   items,
   contain,
   position = "center",
+  positions,
+  contains,
 }: {
   image?: string;
   images?: string[];
@@ -18,6 +20,8 @@ function ServiceCard({
   items: string[];
   contain?: boolean;
   position?: string;
+  positions?: string[];
+  contains?: boolean[];
 }) {
   const cardImages = images ?? (image ? [image] : []);
 
@@ -32,12 +36,12 @@ function ServiceCard({
             className={`
               absolute inset-0
               w-full h-full
-              ${contain ? "object-contain p-3" : "object-cover"}
-              transition-opacity duration-300 ease-in-out
+              ${(contains?.[index] ?? contain) ? "object-contain" : "object-cover"}
+              transition-opacity duration-50 ease-in-out
               ${index === currentImage ? "opacity-100" : "opacity-0"}
             `}
             style={{
-              objectPosition: position,
+              objectPosition: positions?.[index] ?? position,
               filter: "brightness(1.1)",
             }}
           />
@@ -62,7 +66,7 @@ function ServiceCard({
 
 const services = [
   {
-    images: ["/assets/Direct Mail2.avif", "/assets/Loan Queen card.jpg"],
+    images: ["/assets/services/Direct Mail2.avif", "/assets/services/Loan Queen card.jpg"],
     title: "Print Marketing Solutions",
     items: [
       "Business Cards",
@@ -75,16 +79,16 @@ const services = [
 
   {
     images: [
-      "/assets/boxes pic.avif",
-      "/assets/Endless Summer Box.png",
-      "/assets/Gift Bags.png",
+      "/assets/services/boxes pic.avif",
+      "/assets/services/Endless Summer Box.png",
+      "/assets/services/Gift Bags.png",
     ],
     title: "Packaging Solutions",
     items: ["Custom Boxes & Bags", "Labels", "Retail Displays"],
   },
 
   {
-    images: ["/assets/sleeve.jpg", "/assets/Trademark Label.jpg"],
+    images: ["/assets/services/sleeve.jpg", "/assets/services/Trademark Label.jpg"],
     title: "Labels & Sleeves",
     items: ["Product Labels", "Package Sleeves", "Custom Die-Cut Labels"],
     contain: false,
@@ -92,10 +96,10 @@ const services = [
 
   {
     images: [
-      "/assets/install.jpg",
-      "/assets/FlexTech install.avif",
-      "/assets/Schopp install2.jpg",
-      "/assets/EDU Vehicle Sign.png",
+      "/assets/services/install.jpg",
+      "/assets/services/FlexTech install.avif",
+      "/assets/services/Schopp Wall Sign.png",
+      "/assets/services/EDU Vehicle Sign.png",
     ],
     title: "Signage & Installation",
     items: [
@@ -105,12 +109,14 @@ const services = [
     ],
     contain: false,
     position: "center 35%",
+    positions: ["center 35%", "center 35%", "center center", "center 35%"],
+    contains: [false, false, true, false],
   },
 
   {
     images: [
-      "/assets/Elegant Silver Pen with Script K Logo.png",
-      "/assets/Kinecta bottle.jpg",
+      "/assets/services/Elegant Silver Pen with Script K Logo.png",
+      "/assets/services/Kinecta bottle.jpg",
     ],
     title: "Promotional Items",
     items: [
@@ -124,8 +130,8 @@ const services = [
 
   {
     images: [
-      "/assets/ZG.jpeg",
-      "/assets/Kona Brewing Visors.png",
+      "/assets/services/ZG.jpeg",
+      "/assets/services/Kona Brewing Visors.png",
     ],
     title: "Branded Apparel & Merchandise",
     items: [
@@ -215,6 +221,8 @@ export default function ServicesPage() {
             items={service.items}
             contain={(service as any).contain}
             position={(service as any).position}
+            positions={(service as any).positions}
+            contains={(service as any).contains}
           />
         ))}
       </div>
