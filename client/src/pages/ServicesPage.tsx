@@ -33,7 +33,7 @@ function ServiceCard({
               absolute inset-0
               w-full h-full
               ${contain ? "object-contain p-3" : "object-cover"}
-              transition-opacity duration-500 ease-in-out
+              transition-opacity duration-300 ease-in-out
               ${index === currentImage ? "opacity-100" : "opacity-0"}
             `}
             style={{
