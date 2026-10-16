@@ -123,7 +123,10 @@ const services = [
   },
 
   {
-    image: "/assets/ZG.jpeg",
+    images: [
+      "/assets/ZG.jpeg",
+      "/assets/Kona Brewing Visors.png",
+    ],
     title: "Branded Apparel & Merchandise",
     items: [
       "T-shirts & Polos",
