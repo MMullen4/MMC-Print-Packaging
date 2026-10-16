@@ -40,7 +40,6 @@ export default function ContactPage() {
 
   return (
     <div className="relative px-4 py-8 sm:p-8 max-w-xl mx-auto">
-      // ContactPage.tsx
       <SEO
         title="Contact MMC Print & Packaging | Start Your Project"
         description="Contact MMC Print & Packaging to discuss your next printing, packaging, label, display or large-format graphics project."

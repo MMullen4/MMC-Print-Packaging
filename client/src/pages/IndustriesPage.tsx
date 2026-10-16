@@ -144,7 +144,6 @@ export default function IndustriesPage() {
     <main className="max-w-7xl mx-auto px-6 py-12">
       {/* Header */}
       <section className="text-center mb-12">
-        // IndustriesPage.tsx
         <SEO
           title="Custom Print & Packaging Solutions by Industry | MMC"
           description="Explore custom printing and packaging solutions for brands and businesses across a range of industries."

@@ -4,7 +4,6 @@ import SEO from "../components/SEO";
 export default function HomePage() {
   return (
     <div className="relative px-4 py-8 sm:p-8 text-center">
-      // HomePage.tsx
       <SEO
         title="MMC Print & Packaging | Printing & Packaging Solutions"
         description="MMC Print & Packaging provides commercial printing, custom packaging, labels, marketing materials and large-format print solutions."

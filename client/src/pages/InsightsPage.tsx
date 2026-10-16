@@ -25,7 +25,6 @@ export default function InsightsPage() {
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
       {/* Header */}
-      // InsightsPage.tsx
       <SEO
         title="Print & Packaging Insights | MMC Print & Packaging"
         description="Explore print and packaging trends, production technology, industry developments and recent projects from MMC Print & Packaging."

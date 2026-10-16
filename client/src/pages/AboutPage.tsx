@@ -4,7 +4,6 @@ import SEO from "../components/SEO";
 export default function AboutPage() {
   return (
     <div className="relative px-4 py-8 sm:p-8 max-w-3xl mx-auto text-center">
-      // AboutPage.tsx
       <SEO
         title="About MMC Print & Packaging | Print & Packaging Expertise"
         description="Learn about MMC Print & Packaging and our approach to helping businesses develop effective print marketing and packaging solutions."

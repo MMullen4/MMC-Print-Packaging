@@ -1,38 +1,53 @@
+import { useEffect, useState } from "react";
 import ProjectCTA from "../components/ProjectCTA";
 import SEO from "../components/SEO";
 
 function ServiceCard({
   image,
   images,
+  currentImage = 0,
   title,
   items,
   contain,
   position = "center",
-  scale = 1,
 }: {
   image?: string;
   images?: string[];
+  currentImage?: number;
   title: string;
   items: string[];
   contain?: boolean;
   position?: string;
-  scale?: number;
 }) {
+  const cardImages = images ?? (image ? [image] : []);
+
   return (
     <div className="rounded-xl overflow-hidden shadow-lg bg-white">
-      <div className="relative h-48">
-        {images ? (
-          <div className="flex h-full">
-            <img src={images[0]} alt={title} className="w-1/2 h-full object-contain rotate-90 bg-gray-50" style={{ filter: "brightness(1.2)" }} />
-            <img src={images[1]} alt={title} className="w-1/2 h-full object-contain bg-gray-50" style={{ filter: "brightness(1.2)" }} />
-          </div>
-        ) : (
-          <img src={image} alt={title} className={`w-full h-full ${contain ? "object-contain bg-gray-50" : "object-cover"}`} style={{ objectPosition: position, filter: "brightness(1.2)" }} />
-        )}
+      <div className="relative h-48 bg-gray-50 overflow-hidden">
+        {cardImages.map((src, index) => (
+          <img
+            key={src}
+            src={src}
+            alt={`${title} example ${index + 1}`}
+            className={`
+              absolute inset-0
+              w-full h-full
+              ${contain ? "object-contain p-3" : "object-cover"}
+              transition-opacity duration-500 ease-in-out
+              ${index === currentImage ? "opacity-100" : "opacity-0"}
+            `}
+            style={{
+              objectPosition: position,
+              filter: "brightness(1.1)",
+            }}
+          />
+        ))}
+
         <div className="absolute inset-0 bg-black/20 flex items-end p-4">
           <h3 className="text-white text-xl font-bold">{title}</h3>
         </div>
       </div>
+
       <ul className="p-5 space-y-1 text-gray-700">
         {items.map((item) => (
           <li key={item} className="flex items-center gap-2">
@@ -47,42 +62,129 @@ function ServiceCard({
 
 const services = [
   {
-    image: "/assets/Direct Mail2.avif",
+    images: ["/assets/Direct Mail2.avif", "/assets/Loan Queen card.jpg"],
     title: "Print Marketing Solutions",
-    items: ["Business Cards", "Flyers & Postcards", "Books & Brochures", "Signage & Banners", "Direct Mail"],
+    items: [
+      "Business Cards",
+      "Flyers & Postcards",
+      "Books & Brochures",
+      "Signage & Banners",
+      "Direct Mail",
+    ],
   },
+
   {
-    image: "/assets/boxes pic.avif",
+    images: [
+      "/assets/boxes pic.avif",
+      "/assets/Endless Summer Box.png",
+      "/assets/Gift Bags.png",
+    ],
     title: "Packaging Solutions",
-    items: ["Custom Boxes", "Labels", "Retail Displays"],
+    items: ["Custom Boxes & Bags", "Labels", "Retail Displays"],
   },
+
   {
-    image: "/assets/sleeve.jpg",
+    images: ["/assets/sleeve.jpg", "/assets/Trademark Label.jpg"],
     title: "Labels & Sleeves",
     items: ["Product Labels", "Package Sleeves", "Custom Die-Cut Labels"],
     contain: false,
   },
+
   {
-    image: "/assets/install.jpg",
+    images: [
+      "/assets/install.jpg",
+      "/assets/FlexTech install.avif",
+      "/assets/Schopp install2.jpg",
+      "/assets/EDU Vehicle Sign.png",
+    ],
     title: "Signage & Installation",
-    items: ["Indoor / Outdoor Signage & Banners", "Auto Magnets", "Wall Graphics"],
+    items: [
+      "Indoor / Outdoor Signage & Banners",
+      "Auto Magnets",
+      "Wall Graphics",
+    ],
     contain: false,
     position: "center 35%",
   },
+
   {
-    images: ["/assets/Kistler pens.jpg", "/assets/Kinecta bottle.jpg"],
+    images: [
+      "/assets/Elegant Silver Pen with Script K Logo.png",
+      "/assets/Kinecta bottle.jpg",
+    ],
     title: "Promotional Items",
-    items: ["Pens & Notebooks", "Mugs & Drinkware", "USB Drives", "Keychains & Magnets"],
+    items: [
+      "Pens & Notebooks",
+      "Mugs & Drinkware",
+      "USB Drives",
+      "Keychains & Magnets",
+    ],
+    contain: true,
   },
+
   {
     image: "/assets/ZG.jpeg",
     title: "Branded Apparel & Merchandise",
-    items: ["T-shirts & Polos", "Hoodies & Jackets", "Hats & Caps", "Bags & Totes"],
+    items: [
+      "T-shirts & Polos",
+      "Hoodies & Jackets",
+      "Hats & Caps",
+      "Bags & Totes",
+    ],
     position: "center 5%",
   },
 ];
 
 export default function ServicesPage() {
+  // Tracks which image is currently displayed for each service card.
+  const [imageIndexes, setImageIndexes] = useState(services.map(() => 0));
+
+  // Start before the first card so the first rotating card
+  // is selected on the first interval.
+  const [activeCard, setActiveCard] = useState(-1);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveCard((currentCard) => {
+        let nextCard = currentCard;
+
+        // Find the next card containing multiple images.
+        for (let i = 1; i <= services.length; i++) {
+          const candidate =
+            (currentCard + i + services.length) % services.length;
+
+          const images = (services[candidate] as any).images as
+            | string[]
+            | undefined;
+
+          if (images && images.length > 1) {
+            nextCard = candidate;
+            break;
+          }
+        }
+
+        // Advance only the image belonging to that card.
+        setImageIndexes((currentIndexes) => {
+          const nextIndexes = [...currentIndexes];
+
+          const images = (services[nextCard] as any).images as
+            | string[]
+            | undefined;
+
+          if (images && images.length > 1) {
+            nextIndexes[nextCard] = (nextIndexes[nextCard] + 1) % images.length;
+          }
+
+          return nextIndexes;
+        });
+
+        return nextCard;
+      });
+    }, 2000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <div className="p-8 max-w-7xl mx-auto">
       <SEO
@@ -100,16 +202,16 @@ export default function ServicesPage() {
       </p>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((s) => (
+        {services.map((service, index) => (
           <ServiceCard
-            key={s.title}
-            image={(s as any).image}
-            images={(s as any).images}
-            title={s.title}
-            items={s.items}
-            contain={(s as any).contain}
-            position={(s as any).position}
-            scale={(s as any).scale}
+            key={service.title}
+            image={(service as any).image}
+            images={(service as any).images}
+            currentImage={imageIndexes[index]}
+            title={service.title}
+            items={service.items}
+            contain={(service as any).contain}
+            position={(service as any).position}
           />
         ))}
       </div>
