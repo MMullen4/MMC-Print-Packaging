@@ -38,8 +38,8 @@ const industries: Industry[] = [
     title: "Food & Beverage",
     images: [
       "/assets/industries/Takeaway Pkg.png",
-      "/assets/Chori label.jpg",
-      "/assets/Trademark Label.jpg",
+      "/assets/industries/Chori label.jpg",
+      "/assets/industries/Trademark Label.jpg",
     ],
     description:
       "Custom packaging, labels, tags, menus, displays and restaurant marketing materials.",
@@ -68,8 +68,8 @@ const industries: Industry[] = [
     images: [
       "/assets/industries/Sea-to-Me.png",
       "/assets/industries/retail-2.jpg",
-      "/assets/boxes pic.avif",
-      "/assets/retail.png",
+      "/assets/industries/boxes pic.avif",
+      "/assets/industries/retail.png",
     ],
     description:
       "Product packaging, labels, point-of-sale displays, signage and window graphics.",

@@ -2,72 +2,24 @@ import { useEffect, useState } from "react";
 import ProjectCTA from "../components/ProjectCTA";
 import SEO from "../components/SEO";
 
-function ServiceCard({
-  image,
-  images,
-  currentImage = 0,
-  title,
-  items,
-  contain,
-  position = "center",
-  positions,
-  contains,
-}: {
-  image?: string;
-  images?: string[];
-  currentImage?: number;
+type Service = {
   title: string;
+  images: string[];
   items: string[];
-  contain?: boolean;
   position?: string;
   positions?: string[];
+  contain?: boolean;
   contains?: boolean[];
-}) {
-  const cardImages = images ?? (image ? [image] : []);
+  brightness?: number;
+};
 
-  return (
-    <div className="rounded-xl overflow-hidden shadow-lg bg-white">
-      <div className="relative h-48 bg-gray-50 overflow-hidden">
-        {cardImages.map((src, index) => (
-          <img
-            key={src}
-            src={src}
-            alt={`${title} example ${index + 1}`}
-            className={`
-              absolute inset-0
-              w-full h-full
-              ${(contains?.[index] ?? contain) ? "object-contain" : "object-cover"}
-              transition-opacity duration-50 ease-in-out
-              ${index === currentImage ? "opacity-100" : "opacity-0"}
-            `}
-            style={{
-              objectPosition: positions?.[index] ?? position,
-              filter: "brightness(1.1)",
-            }}
-          />
-        ))}
-
-        <div className="absolute inset-0 bg-black/20 flex items-end p-4">
-          <h3 className="text-white text-xl font-bold">{title}</h3>
-        </div>
-      </div>
-
-      <ul className="p-5 space-y-1 text-gray-700">
-        {items.map((item) => (
-          <li key={item} className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0" />
-            {item}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-const services = [
+const services: Service[] = [
   {
-    images: ["/assets/services/Direct Mail2.avif", "/assets/services/Loan Queen card.jpg"],
     title: "Print Marketing Solutions",
+    images: [
+      "/assets/services/Direct Mail2.avif",
+      "/assets/services/Loan Queen card.jpg",
+    ],
     items: [
       "Business Cards",
       "Flyers & Postcards",
@@ -78,47 +30,55 @@ const services = [
   },
 
   {
+    title: "Packaging Solutions",
     images: [
       "/assets/services/boxes pic.avif",
       "/assets/services/Endless Summer Box.png",
       "/assets/services/Gift Bags.png",
     ],
-    title: "Packaging Solutions",
     items: ["Custom Boxes & Bags", "Labels", "Retail Displays"],
   },
 
   {
-    images: ["/assets/services/sleeve.jpg", "/assets/services/Trademark Label.jpg"],
     title: "Labels & Sleeves",
+    images: [
+      "/assets/services/sleeve.jpg",
+      "/assets/services/Trademark Label.jpg",
+    ],
     items: ["Product Labels", "Package Sleeves", "Custom Die-Cut Labels"],
     contain: false,
   },
 
   {
+    title: "Signage & Installation",
     images: [
       "/assets/services/install.jpg",
       "/assets/services/FlexTech install.avif",
       "/assets/services/Schopp Wall Sign.png",
       "/assets/services/EDU Vehicle Sign.png",
     ],
-    title: "Signage & Installation",
     items: [
       "Indoor / Outdoor Signage & Banners",
       "Auto Magnets",
       "Wall Graphics",
     ],
+
+    // Default settings
     contain: false,
     position: "center 35%",
+
+    // Individual image settings
     positions: ["center 35%", "center 35%", "center center", "center 35%"],
+
     contains: [false, false, true, false],
   },
 
   {
+    title: "Promotional Items",
     images: [
       "/assets/services/Elegant Silver Pen with Script K Logo.png",
       "/assets/services/Kinecta bottle.jpg",
     ],
-    title: "Promotional Items",
     items: [
       "Pens & Notebooks",
       "Mugs & Drinkware",
@@ -129,11 +89,11 @@ const services = [
   },
 
   {
+    title: "Branded Apparel & Merchandise",
     images: [
       "/assets/services/ZG.jpeg",
       "/assets/services/Kona Brewing Visors.png",
     ],
-    title: "Branded Apparel & Merchandise",
     items: [
       "T-shirts & Polos",
       "Hoodies & Jackets",
@@ -144,91 +104,156 @@ const services = [
   },
 ];
 
-export default function ServicesPage() {
-  // Tracks which image is currently displayed for each service card.
-  const [imageIndexes, setImageIndexes] = useState(services.map(() => 0));
+/* -------------------------------------------------------
+   IMAGE SLIDESHOW
+------------------------------------------------------- */
 
-  // Start before the first card so the first rotating card
-  // is selected on the first interval.
-  const [activeCard, setActiveCard] = useState(-1);
+function CardSlideshow({
+  images,
+  alt,
+  position = "center",
+  positions,
+  contain = false,
+  contains,
+  brightness = 1,
+  delay = 0,
+}: {
+  images: string[];
+  alt: string;
+  position?: string;
+  positions?: string[];
+  contain?: boolean;
+  contains?: boolean[];
+  brightness?: number;
+  delay?: number;
+}) {
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveCard((currentCard) => {
-        let nextCard = currentCard;
+    if (images.length <= 1) return;
 
-        // Find the next card containing multiple images.
-        for (let i = 1; i <= services.length; i++) {
-          const candidate =
-            (currentCard + i + services.length) % services.length;
+    let interval: number | undefined;
 
-          const images = (services[candidate] as any).images as
-            | string[]
-            | undefined;
+    const timeout = window.setTimeout(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
 
-          if (images && images.length > 1) {
-            nextCard = candidate;
-            break;
-          }
-        }
+      interval = window.setInterval(() => {
+        setCurrent((prev) => (prev + 1) % images.length);
+      }, 5000);
+    }, 4000 + delay);
 
-        // Advance only the image belonging to that card.
-        setImageIndexes((currentIndexes) => {
-          const nextIndexes = [...currentIndexes];
+    return () => {
+      window.clearTimeout(timeout);
 
-          const images = (services[nextCard] as any).images as
-            | string[]
-            | undefined;
-
-          if (images && images.length > 1) {
-            nextIndexes[nextCard] = (nextIndexes[nextCard] + 1) % images.length;
-          }
-
-          return nextIndexes;
-        });
-
-        return nextCard;
-      });
-    }, 2000);
-
-    return () => window.clearInterval(interval);
-  }, []);
+      if (interval) {
+        window.clearInterval(interval);
+      }
+    };
+  }, [images.length, delay]);
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
+    <div className="relative w-full h-56 overflow-hidden bg-gray-50">
+      {images.map((image, index) => {
+        const imageContain = contains?.[index] ?? contain;
+        const imagePosition = positions?.[index] ?? position;
+
+        return (
+          <img
+            key={image}
+            src={image}
+            alt={`${alt} example ${index + 1}`}
+            className={`
+              absolute inset-0
+              w-full h-full
+              ${imageContain ? "object-contain" : "object-cover"}
+              transition-opacity duration-1000
+              ${index === current ? "opacity-100" : "opacity-0"}
+            `}
+            style={{
+              objectPosition: imagePosition,
+              filter:
+                brightness !== 1 ? `brightness(${brightness})` : undefined,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+/* -------------------------------------------------------
+   SERVICES PAGE
+------------------------------------------------------- */
+
+export default function ServicesPage() {
+  return (
+    <main className="max-w-7xl mx-auto px-6 py-12">
       <SEO
         title="Printing & Packaging Services | MMC Print & Packaging"
         description="Commercial printing, custom packaging, labels, signage, banners, promotional products and branded merchandise from MMC Print & Packaging."
         path="/services"
       />
 
-      <h2 className="text-3xl font-semibold mb-2 text-center">
-        Our Products & Services
-      </h2>
+      {/* Header */}
 
-      <p className="text-center text-gray-500 mb-10">
-        High-quality print and packaging solutions tailored to your brand.
-      </p>
+      <section className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold mb-5">
+          Our Products & Services
+        </h1>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          High-quality print and packaging solutions tailored to your brand.
+        </p>
+      </section>
+
+      {/* Service Cards */}
+
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service, index) => (
-          <ServiceCard
+          <div
             key={service.title}
-            image={(service as any).image}
-            images={(service as any).images}
-            currentImage={imageIndexes[index]}
-            title={service.title}
-            items={service.items}
-            contain={(service as any).contain}
-            position={(service as any).position}
-            positions={(service as any).positions}
-            contains={(service as any).contains}
-          />
-        ))}
-      </div>
+            className="
+              bg-white
+              border border-gray-200
+              rounded-xl
+              overflow-hidden
+              shadow-sm
+              hover:shadow-xl
+              transition
+              duration-300
+            "
+          >
+            <CardSlideshow
+              images={service.images}
+              alt={service.title}
+              position={service.position}
+              positions={service.positions}
+              contain={service.contain}
+              contains={service.contains}
+              brightness={service.brightness}
+              delay={index * 600}
+            />
 
-      {/* Project CTA */}
+            <div className="p-6">
+              <h2 className="text-2xl font-bold mb-3">{service.title}</h2>
+
+              <ul className="space-y-2 text-gray-600">
+                {service.items.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0" />
+
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* CTA */}
+
       <ProjectCTA />
-    </div>
+    </main>
   );
 }
