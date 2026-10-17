@@ -38,6 +38,19 @@ export const insights: Insight[] = [
     video: "/assets/insights/marble-banner-project-cropped.mp4",
   },
   {
+    id: 6,
+    type: "news",
+    category: "Industry News",
+    title: "California Packaging Regulation Faces a Broader Legal Challenge",
+    date: "October 9, 2026",
+    summary:
+      "Business and packaging trade groups challenging California's SB 343 recyclability-labeling law are seeking to expand their federal lawsuit to include SB 54, the state's extended producer responsibility and packaging source-reduction law.",
+    whyItMatters:
+      "The outcome could affect how packaging is designed, labeled and evaluated for recyclability in California. Brands and packaging suppliers should continue monitoring SB 343 and SB 54 as the legal challenges could influence compliance requirements, material choices and packaging costs.",
+    link: "https://www.packagingdive.com/news/california-league-food-producers-lawsuit-sb343-sb54/832581/",
+    image: "/assets/insights/California Packaging Laws and Recycling.png",
+  },
+  {
     id: 1,
     type: "news",
     category: "Packaging",
