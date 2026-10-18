@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // imports React hooks to store & update values that trigger a rerender when changed & #2 runs side effects
+import { Link } from "react-router-dom";
 import ProjectCTA from "../components/ProjectCTA";
 import SEO from "../components/SEO";
 
@@ -241,7 +242,6 @@ export default function ServicesPage() {
                 {service.items.map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0" />
-
                     {item}
                   </li>
                 ))}
@@ -249,6 +249,55 @@ export default function ServicesPage() {
             </div>
           </div>
         ))}
+      </section>
+
+      {/* 3D Packaging */}
+
+      <section className="mt-16 bg-gray-50 rounded-2xl p-8 md:p-12">
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <p className="text-blue-600 font-semibold mb-2">
+              Packaging Development
+            </p>
+
+            <h2 className="text-3xl font-bold mb-4">
+              Visualize Your Packaging in 3D
+            </h2>
+
+            <p className="text-gray-600 leading-relaxed mb-6">
+              See your packaging before it goes into production. MMC can create
+              realistic 3D packaging mockups using your artwork, dimensions and
+              packaging structure.
+            </p>
+
+            <Link
+              to="/3d-mockups"
+              className="
+                inline-block
+                bg-blue-600
+                text-white
+                font-semibold
+                px-6
+                py-3
+                rounded-lg
+                hover:bg-blue-700
+                transition
+              "
+            >
+              Explore 3D Packaging
+            </Link>
+          </div>
+
+          <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-lg bg-white">
+            <iframe
+              title="MMC interactive 3D packaging preview"
+              src="https://www.pacdora.com/share?filter_url=ps5lcnjlku"
+              allowFullScreen
+              loading="lazy"
+              className="absolute inset-0 w-full h-full border-0"
+            />
+          </div>
+        </div>
       </section>
 
       {/* CTA */}
