@@ -11,7 +11,7 @@ const filters = [
   "Technology",
   "Sustainability",
   "Market News",
-  "Around the Industry",
+  "Industry News",
 ];
 
 export default function InsightsPage() {

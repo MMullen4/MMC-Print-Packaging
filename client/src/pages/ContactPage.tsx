@@ -1,9 +1,11 @@
 import { useState } from "react";
 import SEO from "../components/SEO";
 
-const API_URL = import.meta.env.VITE_API_URL;
+// const API_URL = import.meta.env.VITE_API_URL;
 
-console.log("MMC API URL:", API_URL)
+// console.log("MMC API URL:", API_URL)
+
+const API_URL = (import.meta.env.VITE_API_URL ?? "").replace(/\/+$/, "");
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
