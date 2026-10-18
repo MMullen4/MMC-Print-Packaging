@@ -15,9 +15,9 @@ const industries: Industry[] = [
   {
     title: "Automotive",
     images: [
-      "/assets/industries/automotive-2.png",
       "/assets/industries/automotive-2.jpg",
       "/assets/industries/DU auto mag.png",
+      "/assets/industries/automotive-2.png",
     ],
     description:
       "Sales and service materials, brochures, promotional products and branded marketing materials.",
@@ -28,8 +28,8 @@ const industries: Industry[] = [
   {
     title: "Education",
     images: [
-      "/assets/industries/education.jpg",
       "/assets/industries/education-2.jpg",
+      "/assets/industries/education.jpg",
     ],
     description:
       "Catalogs, apparel, presentation materials and custom school spirit products.",
@@ -47,8 +47,8 @@ const industries: Industry[] = [
   {
     title: "Health Care",
     images: [
-      "/assets/industries/healthcare.jpg",
       "/assets/industries/healthcare-2.jpg",
+      "/assets/industries/healthcare.jpg",
     ],
     description:
       "Marketing collateral, labels and promotional products for health care organizations.",
@@ -57,8 +57,8 @@ const industries: Industry[] = [
   {
     title: "Real Estate",
     images: [
-      "/assets/industries/real-estate.jpg",
       "/assets/industries/real-estate-2.jpg",
+      "/assets/industries/real-estate.jpg",
     ],
     description:
       "Sales collateral, brochures, presentation folders, displays and signage.",
