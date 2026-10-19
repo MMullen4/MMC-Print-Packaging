@@ -9,8 +9,9 @@ dotenv.config();
 
 const app = express();
 
-// helps express-rate-limit id visitor's IP 
+// Helps express-rate-limit identify the visitor's IP
 app.set("trust proxy", 1);
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const contactLimiter = rateLimit({
@@ -28,27 +29,45 @@ app.post("/contact", contactLimiter, async (req, res) => {
 
   const { name, email, message, website } = req.body;
 
-  // Honeypot - likely bot
+  // --------------------------------------------------
+  // HONEYPOT
+  // Bots often fill this hidden field.
+  // Return success, but DO NOT send an email.
+  // --------------------------------------------------
+
   if (typeof website === "string" && website.trim() !== "") {
     console.log("🤖 Honeypot triggered - likely a bot");
 
-    // Pretend it succeeded so the bot doesn't learn it was blocked
+    // Pretend the submission succeeded
     return res.status(200).json({
       success: true,
     });
   }
 
-  // Required fields
-  if (!name || !email || !message) {
-    console.log("❌ Missing contact form fields");
+  // --------------------------------------------------
+  // REQUIRED FIELDS + TYPE VALIDATION
+  // --------------------------------------------------
+
+  if (
+    typeof name !== "string" ||
+    typeof email !== "string" ||
+    typeof message !== "string" ||
+    !name.trim() ||
+    !email.trim() ||
+    !message.trim()
+  ) {
+    console.log("❌ Invalid or missing contact form fields");
 
     return res.status(400).json({
       success: false,
-      error: "Missing fields",
+      error: "Invalid or missing fields",
     });
   }
 
-  // Basic email validation
+  // --------------------------------------------------
+  // EMAIL VALIDATION
+  // --------------------------------------------------
+
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailPattern.test(email)) {
@@ -60,7 +79,10 @@ app.post("/contact", contactLimiter, async (req, res) => {
     });
   }
 
-  // Basic message validation
+  // --------------------------------------------------
+  // MESSAGE VALIDATION
+  // --------------------------------------------------
+
   if (message.trim().length < 10 || message.length > 5000) {
     console.log("❌ Invalid message length");
 
@@ -71,7 +93,12 @@ app.post("/contact", contactLimiter, async (req, res) => {
   }
 
   console.log("Contact from:", name, email);
+
   console.log("RESEND_API_KEY present:", Boolean(process.env.RESEND_API_KEY));
+
+  // --------------------------------------------------
+  // SEND EMAIL
+  // --------------------------------------------------
 
   try {
     console.log("Attempting to send email with Resend...");
