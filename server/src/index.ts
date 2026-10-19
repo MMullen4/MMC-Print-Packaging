@@ -3,23 +3,42 @@ import cors from "cors";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { Resend } from "resend";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
 const app = express();
+
+// helps express-rate-limit id visitor's IP 
+app.set("trust proxy", 1);
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 5,
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+});
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post("/contact", async (req, res) => {
+app.post("/contact", contactLimiter, async (req, res) => {
   console.log("📩 Contact form received");
 
-  const { name, email, message } = req.body;
+  const { name, email, message, website } = req.body;
 
-  console.log("Contact from:", name, email);
-  console.log("RESEND_API_KEY present:", Boolean(process.env.RESEND_API_KEY));
+  // Honeypot - likely bot
+  if (typeof website === "string" && website.trim() !== "") {
+    console.log("🤖 Honeypot triggered - likely a bot");
 
+    // Pretend it succeeded so the bot doesn't learn it was blocked
+    return res.status(200).json({
+      success: true,
+    });
+  }
+
+  // Required fields
   if (!name || !email || !message) {
     console.log("❌ Missing contact form fields");
 
@@ -28,6 +47,31 @@ app.post("/contact", async (req, res) => {
       error: "Missing fields",
     });
   }
+
+  // Basic email validation
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailPattern.test(email)) {
+    console.log("❌ Invalid email address");
+
+    return res.status(400).json({
+      success: false,
+      error: "Invalid email address",
+    });
+  }
+
+  // Basic message validation
+  if (message.trim().length < 10 || message.length > 5000) {
+    console.log("❌ Invalid message length");
+
+    return res.status(400).json({
+      success: false,
+      error: "Invalid message",
+    });
+  }
+
+  console.log("Contact from:", name, email);
+  console.log("RESEND_API_KEY present:", Boolean(process.env.RESEND_API_KEY));
 
   try {
     console.log("Attempting to send email with Resend...");
@@ -43,7 +87,7 @@ Email: ${email}
 
 Message:
 ${message}
-  `,
+      `,
     });
 
     if (error) {

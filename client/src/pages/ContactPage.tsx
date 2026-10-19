@@ -1,14 +1,15 @@
 import { useState } from "react";
 import SEO from "../components/SEO";
 
-// const API_URL = import.meta.env.VITE_API_URL;
-
-// console.log("MMC API URL:", API_URL)
-
 const API_URL = (import.meta.env.VITE_API_URL ?? "").replace(/\/+$/, "");
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    message: "",
+    website: "",
+  });
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -33,7 +34,7 @@ export default function ContactPage() {
 
       if (!res.ok) throw new Error("Failed to send message");
       setStatus("success");
-      setForm({ name: "", email: "", message: "" });
+      setForm({ name: "", email: "", message: "", website: "" });
     } catch (err) {
       console.error("Error sending contact form:", err);
       setStatus("error");
@@ -77,6 +78,30 @@ export default function ContactPage() {
         </p>
       </div>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Honeypot field - hidden from real users */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            overflow: "hidden",
+          }}
+        >
+          <label htmlFor="website">Website</label>
+
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={form.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <input
           name="name"
           type="text"
@@ -86,6 +111,7 @@ export default function ContactPage() {
           onChange={handleChange}
           value={form.name}
         />
+
         <input
           name="email"
           type="email"
@@ -95,6 +121,7 @@ export default function ContactPage() {
           onChange={handleChange}
           value={form.email}
         />
+
         <textarea
           name="message"
           placeholder="Message"
@@ -103,6 +130,7 @@ export default function ContactPage() {
           onChange={handleChange}
           value={form.message}
         />
+
         <button
           type="submit"
           className="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded text-base hover:bg-blue-700 transition"
