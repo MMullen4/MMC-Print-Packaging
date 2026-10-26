@@ -14,7 +14,7 @@ export default function HomePage() {
         style={{ backgroundImage: "url('/assets/specialty packaging.avif')" }}
       />
       <h1 className="text-2xl sm:text-4xl font-bold mb-4">
-        Welcome to MMC Print & Packaging
+        Elevate your brand through print & packaging solutions.
       </h1>
       <p className="text-base sm:text-lg max-w-xl mx-auto">
         We deliver premium print marketing and packaging solutions that build
