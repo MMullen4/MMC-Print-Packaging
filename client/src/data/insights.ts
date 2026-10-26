@@ -19,7 +19,7 @@ export const insights: Insight[] = [
     title: "When Promotional Products Make a Lasting Impression",
     date: "October 21, 2026",
     summary:
-      "A great example of how promotional products can leave a lasting impression! (And maybe gain you more business 😊",
+      "A great example of how promotional products can leave a lasting impression! (And maybe gain you more business 😊)",
     link: "https://www.linkedin.com/posts/joshua-j-wickstrom-1823786_this-is-guaranteed-to-get-a-good-laugh-i-share-7518311844441182208-qw1D/",
     image: "/assets/insights/promo-prod.png",
   },
